@@ -30,14 +30,16 @@ $rez = file_get_contents($str);
 $json = json_decode($rez, true);
 
 $email = $userData['email'];
-$stmt = $pdo->query("Select email,password,role from person WHERE email = '$email'");
+$stmt = $pdo->query("Select person_id,email,password,role from person WHERE email = '$email'");
 $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
 if ($result) { // useri ekziston
-	$_SESSION['role'] = "user";
+	$_SESSION['role'] = $result[0]['role'];
+	$_SESSION['user_email'] = $email;
+	$_SESSION['user_id'] = $result[0]['person_id'];
 	header('Location: home.php');
 } else {
 	$_SESSION['id'] = $userData['id'];
-	$_SESSION['email'] = $email;
+	$_SESSION['user_email'] = $email;
 	// $_SESSION['gender'] = $userData['gender'];
 	// $_SESSION['picture'] = $userData['picture'];
 	$_SESSION['name'] = $userData['familyName'];

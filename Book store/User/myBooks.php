@@ -82,9 +82,9 @@ $stmt->execute();
                                 <div class="col-md-12">
                                     <div class="card-footer ">
                                         <div class="card-text">
-                                            <button class="btn btn-outline-success prove" data-toggle="modal" data-target="#myModal" data-file="<?php echo $row[$i]["book_file"]; ?>">Lexo</button>
+                                            <button class="btn btn-outline-success prove" data-toggle="modal" data-target="#myModal" data-file="<?php echo $row[$i]["book_file"]; ?>"><i class="bi bi-book"></i> Lexo</button>
 
-                                            <a class="btn btn-outline-primary" href="../book_file/<?php echo $row[$i]["book_file"]; ?>" download="newfilename">Shkarko</a>
+                                            <a class="btn btn-outline-primary" href="../book_file/<?php echo $row[$i]["book_file"]; ?>" download="newfilename"><i class="bi bi-download"></i> Shkarko</a>
                                         </div>
                                     </div>
                                 </div>

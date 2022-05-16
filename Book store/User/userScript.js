@@ -28,6 +28,43 @@ $(document).ready(function () {
             }
         });
     });
+    $("#payments-button").click(function (e) { 
+        e.preventDefault();
+        $.ajax({
+            type: "GET",
+            url: "myPayments.php",
+            success: function (response) {
+                $(".list-group li").removeClass("active");
+                $("#payments-button").addClass("active");
+                $(".content-div").html(response);
+            }
+        });
+        
+    });
+    $("#profile-button").click(function (e) { 
+        e.preventDefault();
+        $.ajax({
+            type: "GET",
+            url: "myProfile.php",
+            success: function (response) {
+                $(".list-group li").removeClass("active");
+                $("#profile-button").addClass("active");
+                $(".content-div").html(response);
+            }
+        });
+    });
+    $("#edit-profile-button").click(function (e) { 
+        e.preventDefault();
+        $.ajax({
+            type: "GET",
+            url: "myProfile.php",
+            success: function (response) {
+                $(".list-group li").removeClass("active");
+                $("#profile-button").addClass("active");
+                $(".content-div").html(response);
+            }
+        });
+    });
 
     $(document).on("click", ".add", function (e) {
         alert("test");

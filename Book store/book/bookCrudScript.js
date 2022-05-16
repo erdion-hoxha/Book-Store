@@ -369,8 +369,8 @@ $(document).ready(function () {
                         // $('.modal').removeClass('show');
                         // $('.modal').removeClass('show');
                         $('#cancel-button').click();
-                        var data = $("#index-table").html();
-                        console.log(data);
+                        // var data = $("#index-table").html();
+                        // console.log(data);
                         button.prop("disabled", false);
                         // var div = $(location.href + " #index-table").html();
                         //$("#user_form")[0].reset();
@@ -457,8 +457,8 @@ $(document).ready(function () {
                     // $('.modal').removeClass('show');
                     // $('.modal').removeClass('show');
                     $('#cancel-button-e').click();
-                    var data = $("#index-table").html();
-                    console.log(data);
+                    // var data = $("#index-table").html();
+                    // console.log(data);
                     // $("#index-table").load("bookIndex.php");
                     //$("#data-div").load("#data-div");
                     window.location.reload();
@@ -508,13 +508,13 @@ $(document).ready(function () {
                     // $('.modal').removeClass('show');
                     // $('.modal').removeClass('show');
                     $('#cancel-button-d').click();
-                    var data = $("#index-table").html();
-                    console.log(data);
+                    // var data = $("#index-table").html();
+                    // console.log(data);
                     // $("#index-table").load("bookIndex.php");
                 } else {
                     swal(rez.Message);
                 }
-                $("#data-div").load("#data-div");
+                window.location.reload();
 
                 //$("#index-table").html(data);
             }
@@ -538,7 +538,6 @@ $(document).ready(function () {
 $(document).on("click", ".update", function (e) {
     debugger;
     e.preventDefault();
-
     var id = $(this).attr("data-id");
     isbn = id;
     var title = $(this).attr("data-title");

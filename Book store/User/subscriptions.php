@@ -42,7 +42,7 @@ $stmt->execute();
                                 <div class="col-md-12">
                                     <div class="card-footer ">
                                         <p class="btn btn-outline-success float-right buySubscription">
-                                            <i class="bi bi-eye-fill" data-id=<?php echo $row[$i]["subscription_id"]; ?> data-price=<?php echo $row[$i]["price"]; ?> data-subscription-type=<?php echo $row[$i]["type"]; ?> data-sale=<?php echo $row[$i]["amount_of_sale"]; ?>>Buy</i> 
+                                            <i class="bi bi-credit-card-fill" data-id=<?php echo $row[$i]["subscription_id"]; ?> data-price=<?php echo $row[$i]["price"]; ?> data-subscription-type=<?php echo $row[$i]["type"]; ?> data-sale=<?php echo $row[$i]["amount_of_sale"]; ?>> Buy</i> 
                                         </p>
                                     </div>
                                 </div>

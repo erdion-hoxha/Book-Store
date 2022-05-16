@@ -33,9 +33,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                     $check = true;
                     foreach ($arr as $item) {
                         if (
-                            $item['city'] == $id &&
-                            $item['street_name'] == $user_street &&
-                            $item['postal_code'] == $user_postalCode
+                            strtolower($item['city']) == strtolower($id) &&
+                            strtolower($item['street_name']) ==  strtolower($user_street) &&
+                            strtolower($item['postal_code']) == strtolower($user_postalCode)
                         ) {
                             //adresa ekziston nuk eshte nevoja qe ta shtojme
                             $check = false;

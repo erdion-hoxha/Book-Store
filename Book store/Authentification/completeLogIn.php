@@ -15,12 +15,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 	} else {
 		try {
 			$pdo->beginTransaction();
-			$stmt = $pdo->query("Select email,password,role from person WHERE email = '$user_email'");
+			$stmt = $pdo->query("Select person_id,email,password,role from person WHERE email = '$user_email'");
 			$result = $stmt->fetchAll(PDO::FETCH_ASSOC);
 			if ($result) { // useri ekziston
 				if (password_verify($user_password, $result[0]['password'])) {
 					$_SESSION["user_email"] = $user_email;
 					$_SESSION["role"] = $result[0]['role'];
+					$_SESSION["user_id"] = $result[0]['person_id'];
 					echo json_encode(["Return" => true, "Message" => "Me sukses"]);
 					exit();
 				} else {

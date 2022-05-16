@@ -9,12 +9,6 @@ while ($row = $stmt->fetchAll(PDO::FETCH_ASSOC)) {
     for ($i = 0; $i < count($row); $i++) {
 ?>
         <tr id="<?php echo $row[$i]["ISBN"]; ?>">
-            <!-- <td>
-                                    <span class="custom-checkbox">
-                                        <input type="checkbox" class="user_checkbox" data-user-id="<?php echo $row[$i]["ISBN"]; ?>">
-                                        <label for="checkbox2"></label>
-                                    </span>
-                                </td> -->
             <td><?php echo $row[$i]["ISBN"]; ?></td>
             <td><?php echo $row[$i]["book_name"]; ?></td>
             <td><?php echo $row[$i]["price"]; ?></td>

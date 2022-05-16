@@ -36,7 +36,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 				$id = $result[0]['city_id'];
 				// $stmt = $pdo->query("Select city,street_name,postal_code,address_id from address where city = '$id'");
 				// $arr = $stmt->fetchAll(PDO::FETCH_ASSOC);
-				$stmt = $pdo->prepare("Select city,street_name,postal_code,address_id from address where city = :city");
+				$stmt = $pdo->prepare("Select city_name,street_name,postal_code,address_id from address where city = :city");
 				$stmt->bindParam(':city', $id);
 				$stmt->execute();
 				$arr = $stmt->fetchAll(PDO::FETCH_ASSOC);
@@ -64,7 +64,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 				$sql = $pdo->prepare("INSERT INTO `city` (`name`) VALUES (?);");
 				$sql->execute(array($user_city));
 				$city_id = $pdo->lastInsertId();
-				$sql = $pdo->prepare("INSERT INTO `address` (`city`, `street_name`, `postal_code`) VALUES (?,?,?);");
+				$sql = $pdo->prepare("INSERT INTO `address` (`city_name`, `street_name`, `postal_code`) VALUES (?,?,?);");
 				$sql->execute(array($city_id, $user_street, $user_postalCode));
 				$address_id = $pdo->lastInsertId();
 			}

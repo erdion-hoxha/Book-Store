@@ -9,7 +9,7 @@ while ($row = $stmt->fetchAll(PDO::FETCH_ASSOC)) {
     for ($i = 0; $i < count($row); $i++) {
 ?>
         <tr id="<?php echo $row[$i]["person_id"]; ?>">
-            <td><?php echo $row[$i]["name"]; ?></td>
+            <td style="width: auto;"><?php echo $row[$i]["name"]; ?></td>
             <td><?php echo $row[$i]["surname"]; ?></td>
             <td><?php echo $row[$i]["email"]; ?></td>
             <td><?php echo $row[$i]["birthday"]; ?></td>

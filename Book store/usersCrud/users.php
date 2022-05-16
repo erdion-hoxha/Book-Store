@@ -48,9 +48,9 @@ include '../DBconnect.php';
         table th,
         td,
         tr {
-            font-size: 13px;
+            font-size: 17px;
+            text-align: center;
         }
-
         /* table tr ul.actions {margin: 0; red-space:nowrap;} */
     </style>
 </head>
