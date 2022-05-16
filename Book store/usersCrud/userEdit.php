@@ -3,70 +3,75 @@ session_start();
 require_once "../DBconnect.php";
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
-    $person_id = (int)$_POST["id"];
-    if ($person_id != (int)$_POST["First_person_id"]) {
-        try {
-            $stmt = $pdo->query("Select person_id from person WHERE person_id = $person_id");
-            $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
-            if ($result != null) {
-                echo json_encode(["Return" => false, "Message" => "Useri me kete id ekziston ne database"]);
-                exit;
-            }
-        } catch (PDOException $e) {
-            echo json_encode(["Return" => false, "Message" => $e->getMessage()]);
+    $email = $_POST["email_e"];
+    try {
+        $stmt = $pdo->prepare("Select person_id from person WHERE email LIKE :user_id");
+		$stmt->bindParam(':user_id', $email);
+        $stmt->execute();
+        $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        if ($result == null) {
+            echo json_encode(["Return" => false, "Message" => "Useri me kete id ekziston ne database"]);
             exit;
         }
+    } catch (PDOException $e) {
+        echo json_encode(["Return" => false, "Message" => $e->getMessage()]);
+        exit;
     }
+    $id = $result[0]["person_id"];
+    $person_name = $_POST["name_e"];
+    $lastName = $_POST["surname_e"];
+    $postal_code = $_POST["postalCode_e"];
+    $city_name = $_POST["city_e"];
+    $street = $_POST["streetName_e"];
+    $birthday = date('Y-m-d', strtotime($_POST["birthday_e"]));
 
-    $person_name = $_POST["name"];
-    $lastName = $_POST["surname"];
-    $postal_code = $_POST["postal_code"];  
-    $city_name = $_POST["city_name"]; 
-    $password = $_POST["password"];  
-    $email = $_POST["email"];
-
-    if (isset($_POST["birthday"])) {
-        $birthday = date('Y-m-d', strtotime($_POST["birthday"]));
-    }
-
-    $role = $_POST["role"];
+    $role = $_POST["role_e"];
     $pdo->beginTransaction();
 
     $stmt = $pdo->query("Select city_id from city where city_name = '$city_name'");
     $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
     if ($result != null) {
         $city_id = $result[0]['city_id'];
+        $stmt = $pdo->prepare("Select city,street_name,postal_code,address_id from address where city = :city");
+        $stmt->bindParam(':city', $city_id);
+        $stmt->execute();
+        $arr = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        if ($arr) {
+            $check = true;
+            foreach ($arr as $item) {
+                if (
+                    $item['city'] == $city_id &&
+                    strtolower($item['street_name']) == strtolower($street) &&
+                    $item['postal_code'] == $postal_code
+                ) {
+                    //adresa ekziston nuk eshte nevoja qe ta shtojme
+                    $check = false;
+                    $address_id = $item['address_id'];
+                    break;
+                }
+            }
+            if ($check) {
+                $sql = $pdo->prepare("INSERT INTO `address` (`city`, `street_name`, `postal_code`) VALUES (?,?,?);");
+                $sql->execute(array($city_id, $street, $postal_code));
+                $address_id = $pdo->lastInsertId();
+            }
+        }
     } else {
         echo json_encode(["Return" => false, "Message" => 'qyteti nuk ekziston ka gabim']);
         exit;
     }
 
-    $stmt = $pdo->query("Select city_id from city where city_name = '$city_name'");
-    $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
-    if ($result != null) {
-        $city_id = $result[0]['city_id'];
-    } else {
-        echo json_encode(["Return" => false, "Message" => 'qyteti nuk ekziston ka gabim']);
-        exit;
-    }
-    
     try {
-        // $sql = $pdo->prepare("Update `book` SET `ISBN` = $isbn,
-        // `book_name` = $book_name,
-        // `publishing_house_id` = $publishing_house_id,
-        // `price` = $price,
-        // `quantity` = $quantity,
-        // `description` = $description,
-        // `FK_book_category_id` = $category_id,
-        // `author_id` = $author_id
-        // where `book`.`ISBN` = $isbn");
-        $sql = $pdo->prepare("Update `person` SET `person_id` = ?, `name` = ?, `surname` = ? ,`role` = ? ,`postal_code` = ?,
-                `city_name` = ?, = ?, `password` = ? where `person`.`person_id` = ? ");
-        $sql->execute(array($person_id, $person_name, $lastName, $role, $postal_code, $city_name, $password,(int)$_POST["First_person_id"]));
+
+        $sql = $pdo->prepare("Update `person` SET `name` = ?, `surname` = ? ,`role` = ? ,`address_id` = ?, `birthday` = ?
+                 where `person`.`person_id` = ? ");
+        $sql->execute(array($person_name, $lastName, $role, $address_id, $birthday, $id));
+        $pdo->commit();
+        echo json_encode(["Return" => true, "Message" => "Update u krye me suskes"]);
+
     } catch (PDOException $e) {
         $pdo->rollBack();
         echo json_encode(["Return" => false, "Message" => $e->getMessage()]);
         exit;
     }
 }
-           

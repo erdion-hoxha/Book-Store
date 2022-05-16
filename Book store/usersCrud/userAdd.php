@@ -3,16 +3,16 @@ session_start();
 include "../DBconnect.php";
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-	$user_name = $_POST['name'];
-	$user_surname = $_POST['surname'];
-	$user_email = $_POST['email'];
-	$user_password = password_hash($_POST['password'], PASSWORD_DEFAULT);
-	$user_confirmPassword = $_POST['confirm_password'];
-	$user_birthday = date('Y-m-d', strtotime($_POST['birthday']));
-	$user_city = $_POST['city_name'];
-	$user_street = $_POST['street_name'];
-	$user_postalCode = $_POST['postal_code'];
-	$user = $_POST['role'];
+	$user_name = $_POST['Name'];
+	$user_surname = $_POST['Surname'];
+	$user_email = $_POST['Email'];
+	$user_password = password_hash($_POST['Password'], PASSWORD_DEFAULT);
+	$user_confirmPassword = $_POST['ConfirmPassword'];
+	$user_birthday = date('Y-m-d', strtotime($_POST['Birthday']));
+	$user_city = $_POST['City'];
+	$user_street = $_POST['Street'];
+	$user_postalCode = $_POST['PostalCode'];
+	$user = $_POST['Role'];
 
 
 	if (!filter_var($user_email, FILTER_SANITIZE_EMAIL)) {
@@ -30,7 +30,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 		if ($result == null) {
 			// $stmt = $pdo->query("Select city_id from city WHERE name LIKE '$user_city'");
 			// $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
-			$stmt = $pdo->prepare("Select city_id from city WHERE name LIKE :city");
+			$stmt = $pdo->prepare("Select city_id from city WHERE city_name LIKE :city");
 			$stmt->bindParam(':city', $user_city);
 			$stmt->execute();
 			$result = $stmt->fetchAll(PDO::FETCH_ASSOC);
