@@ -1,5 +1,9 @@
 <?php
 session_start();
+if (!isset($_SESSION['role'])) {
+    header('Location: login.php');
+    exit();
+}
 include "../DBconnect.php";
 ?>
 
@@ -69,6 +73,16 @@ include "../DBconnect.php";
                     <div class="bio-row col">
                         <p><b>AMOUNT OF SALE</b> </span>: <?php echo $rez[0]["amount_of_sale_at_purchase"] ?>%</p>
                     </div>
+                <?php
+                } else {
+                ?>
+                    <div class="alert alert-info" role="alert">
+                        <h3 style="text-align: center; ">
+                            Nuk keni blerje aktive
+                        </h3>
+                    </div>
+
+
                 <?php
                 }
                 ?>

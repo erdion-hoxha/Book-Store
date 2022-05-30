@@ -40,7 +40,7 @@ if (!empty($_GET['SearchCategory']) && !empty($_GET['Search'])) {
 }
 $stmt->execute();
 ?>
-<div style="margin-left: 100px; margin-right: 100px;">
+<div style="margin-left: 10%; margin-right: 10%;">
     <div class="container-fluid">
         <?php
         while ($row = $stmt->fetchAll(PDO::FETCH_ASSOC)) {
@@ -53,7 +53,7 @@ $stmt->execute();
                 }
                     ?>
 
-                    <div class="col-md-4 col-xs-6 border-primary mb-3">
+                    <div class="col-md-4 col-xs-10 border-primary mb-3">
                         <div class="card mb-3" style="max-width: 540px;">
                             <div class="row g-0">
                                 <div class="col-md-12">
@@ -84,7 +84,7 @@ $stmt->execute();
                                         <div class="card-text">
                                             <button class="btn btn-outline-success prove" data-toggle="modal" data-target="#myModal" data-file="<?php echo $row[$i]["book_file"]; ?>"><i class="bi bi-book"></i> Lexo</button>
 
-                                            <a class="btn btn-outline-primary" href="../book_file/<?php echo $row[$i]["book_file"]; ?>" download="newfilename"><i class="bi bi-download"></i> Shkarko</a>
+                                            <a class="btn btn-outline-primary" href="../book_file/<?php echo $row[$i]["book_file"]; ?>" download="<?php echo $row[$i]["book_file"]; ?>"><i class="bi bi-download"></i> Shkarko</a>
                                         </div>
                                     </div>
                                 </div>

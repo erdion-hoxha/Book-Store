@@ -29,7 +29,7 @@ if (!empty($_GET['SearchCategory']) && !empty($_GET['Search'])) {
 $stmt->execute();
 
 ?>
-<div style="margin-left: 100px; margin-right: 100px;">
+<div style="margin-left: 10%; margin-right: 10%;">
     <div class="container-fluid">
         <?php
         while ($row = $stmt->fetchAll(PDO::FETCH_ASSOC)) {
@@ -42,7 +42,7 @@ $stmt->execute();
                 }
                     ?>
 
-                    <div class="col-md-4 col-xs-6 border-primary mb-3">
+                    <div class="col-md-4 col-xs-10 border-primary mb-3">
                         <div class="card mb-3" style="max-width: 540px;">
                             <div class="row g-0">
                                 <div class="col-md-12">
@@ -71,7 +71,7 @@ $stmt->execute();
                                 <div class="col-md-12">
                                     <div class="card-footer ">
                                         <div class="card-text">
-                                            <p class="btn btn-outline-primary float-right">
+                                            <p class="btn btn-outline-primary float-right details">
                                                 <i class="bi bi-info-circle-fill" data-ISBN=<?php echo $row[$i]["ISBN"]; ?> ></i> Show Details
                                             </p>
                                             <p class="btn btn-outline-success float-right add">

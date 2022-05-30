@@ -1,5 +1,19 @@
 <?php
 session_start();
+if (isset($_SESSION['permisson'])) {
+    unset($_SESSION['permisson']);
+}
+if (isset($_SESSION['access_token'])) {
+    unset($_SESSION['access_token']);
+}
+if (!isset($_SESSION['role'])) {
+    header('Location: login.php');
+    exit();
+}
+if ($_SESSION['role'] == "user") {
+    header('Location: ../User/home.php');
+    exit();
+}
 include "../DBconnect.php";
 ?>
 <!DOCTYPE html>
@@ -10,10 +24,12 @@ include "../DBconnect.php";
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous" />
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4" crossorigin="anonymous"></script>
     <title>Admin</title>
 </head>
 
@@ -37,7 +53,7 @@ include "../DBconnect.php";
         ?>
         <div class="row">
             <div class="col-md-3 col-sm-3 col-xs-6">
-                <a href="#">
+                <a href="../book/Books.php">
                     <div class="alert alert-success back-widget-set text-center" style="text-decoration: none;">
                         <i class="fa fa-book fa-5x"></i>
                         <p>Number of books: <?php echo $count[0]["count(ISBN)"] ?></p>
@@ -52,7 +68,7 @@ include "../DBconnect.php";
             ?>
 
             <div class="col-md-3 col-sm-3 col-xs-6">
-                <a href="#">
+                <a href="../UsersCrud/users.php">
                     <div class="alert alert-success back-widget-set text-center">
                         <i class="fa fa-users fa-5x"></i>
                         <p>
@@ -122,7 +138,7 @@ include "../DBconnect.php";
                 <a href="#">
                     <div class="alert alert-info back-widget-set text-center">
                         <i class="fa fa-rocket fa-5x"></i>
-                        <P><?php echo $count[0]["count(subscription_id)"]?> Subscriptions</P>
+                        <P><?php echo $count[0]["count(subscription_id)"] ?> Subscriptions</P>
                     </div>
                 </a>
             </div>

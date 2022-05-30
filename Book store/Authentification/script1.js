@@ -372,7 +372,13 @@ $(document).ready(function () {
             console.log(response);
             if (rez.Return == true) {
               button.prop("disabled", false);
-              window.location.href = "home.php";
+              if (rez.Role == "admin" || rez.Role == "worker") {
+                window.location.href = "../Admin/home.php"; 
+              }
+              else{
+
+                window.location.href = "../User/home.php";
+              }
             } else {
               if (rez.Message == "Prit") {
                 button.prop("disabled", true);
@@ -383,6 +389,7 @@ $(document).ready(function () {
                 window.location.href = "login.php";
               }
               // window.location.href = "login.php";
+              
               alert(rez.Message);
             }
           },

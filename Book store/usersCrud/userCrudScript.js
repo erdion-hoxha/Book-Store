@@ -590,7 +590,7 @@ $(document).on("click", ".delete", function (e) {
     } else {
         $("#first-warning-message").text("Are you sure you want to delete this user?");
         $("#button-delete").attr('class', 'btn btn-danger');
-        $("#button-delete").text("Activate");
-        $("#modal-title").text("Activate User");
+        $("#button-delete").text("Delete");
+        $("#modal-title").text("Delete User");
     }
 });

@@ -1,10 +1,14 @@
 <?php
 session_start();
 if (!isset($_SESSION['role'])) {
-    header('Location: ../Authentification/home.php');
-    exit();
-} else if ($_SESSION['role'] != 'admin') {
     header('Location: ../Authentification/login.php');
+    exit();
+} else if ($_SESSION['role'] != 'admin' && $_SESSION['role'] == 'worker' ) {
+    header('Location: ../Admin/home.php');
+    exit();
+}
+else if(['role'] == 'user'){
+    header('Location: ../User/home.php');
     exit();
 }
 include '../DBconnect.php';
@@ -37,6 +41,7 @@ include '../DBconnect.php';
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
     <script src="userCrudScript.js"></script>
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4" crossorigin="anonymous"></script>
     <style>
         table,
         th,
@@ -48,7 +53,7 @@ include '../DBconnect.php';
         table th,
         td,
         tr {
-            font-size: 17px;
+            font-size: 10px;
             text-align: center;
         }
         /* table tr ul.actions {margin: 0; red-space:nowrap;} */
@@ -60,7 +65,7 @@ include '../DBconnect.php';
     include "../Admin/header.php";
 
     ?>
-    <div class="container" id="data-div" style="width: 100%;">
+    <div class="table-responsive container" id="data-div" style="margin-top: 70px;width: 100%;">
         <p id="success"></p>
         <div class="table-wrapper">
             <div class="table-title">
@@ -72,7 +77,7 @@ include '../DBconnect.php';
                         <!-- <button type="button" id="tmp" class="btn btn-primary" data-toggle="modal">
                             <i class="material-icons"></i> <span>Add New Book</span>
                         </button> -->
-                        <a href="#addUserModal" id="add-user-button" class="btn btn-success" data-toggle="modal" data-target="#addUserModal"><i class="material-icons"></i> <span style="color: red;">Add New User</span></a>
+                        <a href="#addUserModal" style="color: white;" id="add-user-button" class="btn btn-success" data-toggle="modal" data-target="#addUserModal"><i class="material-icons"></i> <span style="color: white;">Add New User</span></a>
                         <!-- <a href="JavaScript:void(0);" class="btn btn-danger" id="delete_multiple"><i class="material-icons"></i> <span>Delete</span></a> -->
                     </div>
                 </div>

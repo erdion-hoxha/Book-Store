@@ -20,7 +20,7 @@ $stmt->execute();
                 }
                     ?>
 
-                    <div class="col-md-4 col-xs-6 border-primary mb-3">
+                    <div class="col-md-4 col-xs-12 border-primary mb-3">
                         <div class="card mb-3" style="max-width: 540px;">
                             <div class="row g-0">
                                 <div class="col-md-12">

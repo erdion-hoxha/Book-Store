@@ -21,11 +21,12 @@ if (isset($_SESSION["user_email"])) {
     $data = $stmt->fetchAll(PDO::FETCH_ASSOC);
     if (count($data) == 0) {
 ?>
-        <div>
-            <h3>
-                Ju nuk keni libra ne shporte
+        <br>
+        <br>
+        <div class="alert alert-info" role="alert">
+            <h3 style="text-align: center; ">
+                Nuk keni blerje aktive
             </h3>
-
         </div>
     <?php
         exit;
@@ -72,15 +73,18 @@ if (isset($_SESSION["user_email"])) {
             $stmt->execute();
             $row = $stmt->fetchAll(PDO::FETCH_ASSOC);
             if (count($row) != 0) {
-                $sale = $row[0]["amount_of_sale_at_purchase"];
-                $total = $total * (100 - $sale)/100;
+                $sale =  $total * $row[0]["amount_of_sale_at_purchase"] / 100;
+                $total = $total - $sale;
                 $tax = $total * 0.2;
             ?>
-             <tr>
-                <td colspan="4" style="text-align: right;">  Tax = <?php echo $tax ?>$</td>
-            </tr>
+                <tr>
+                    <td colspan="4" style="text-align: right;"> Subscription Sale = <?php echo $sale ?>$</td>
+                </tr>
                 <tr>
                     <td colspan="4" style="text-align: right;"> Final Price = <?php echo $total ?>$</td>
+                </tr>
+                <tr>
+                    <td colspan="4" style="text-align: right;"> Tax = <?php echo $tax ?>$</td>
                 </tr>
             <?php
             }

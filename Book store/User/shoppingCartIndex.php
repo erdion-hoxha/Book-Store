@@ -1,5 +1,9 @@
 <?php
 session_start();
+if (!isset($_SESSION['role'])) {
+    header('Location: login.php');
+    exit();
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -15,6 +19,7 @@ session_start();
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
     <script src="shoppingCartScript.js"></script>
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4" crossorigin="anonymous"></script>
 
     <title>Document</title>
     <style>
@@ -36,7 +41,7 @@ session_start();
     <br>
  
 
-    <div class="container" style="margin-top: 120px; margin-bottom: 120px; box-shadow: 0 0 20px rgba(0, 0, 0, 0.5); ">
+    <div class="container" style="margin-top: 120px; margin-bottom: 120px;">
         <?php
         include "shoppingCart.php";
         ?>

@@ -80,18 +80,18 @@ $loginURL = $gClient->createAuthUrl();
                 <input type="password" class="form-control" id="Password" name="Password" placeholder="Password">
                 <span class="invalid-feedback" style="color: white;"></span>
             </div>
-            <div id="imgId" class="form-group col-6 row">
+            <div id="imgId" class="form-group col-md-6 col-xs-12 row">
                 <label>Captcha Code</label>
                 <img id="img" src="captcha.php" alt="PHP Captcha">
-                <input type="text" name="Captcha" id="Captcha">
+                <input class="form-control" type="text" name="Captcha" id="Captcha">
             </div>
             <br>
             <div>
             </div>
-            <button type="submit" id="LogInsubmitButton" class="btn btn-primary">Continue</button>
+            <button type="submit" id="LogInsubmitButton" class="btn btn-primary col-md-6 col-xs-12">Continue</button>
             <br>
             <br>
-            <input type="button" onclick="window.location = '<?php echo $loginURL ?>';" value="Log In With Google" class="btn btn-danger">
+            <input type="button" onclick="window.location = '<?php echo $loginURL ?>';" value="Log In With Google" class="btn btn-danger  col-md-6 col-xs-12">
             <p class="form_text">
                 <a class="form_link" href="emailForReset.php" id="linkResetPassword">Forgot your password?</a>
             </p>
@@ -127,7 +127,7 @@ if (!empty($_SESSION["locked"])) {
         $_SESSION["login_attempts"] = 0;
     } else {
         $_SESSION["login_attempts"] += 1;
-        if ($_SESSION["login_attempts"] > 2) {
+        if ($_SESSION["login_attempts"] > 5) {
             $_SESSION["locked"] = time();
             echo '<script>alert("Prisni 2 minuta");$("#LogInsubmitButton").prop("disabled", true);</script>';
         }

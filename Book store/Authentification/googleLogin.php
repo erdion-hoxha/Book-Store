@@ -30,13 +30,27 @@ $rez = file_get_contents($str);
 $json = json_decode($rez, true);
 
 $email = $userData['email'];
-$stmt = $pdo->query("Select person_id,email,password,role from person WHERE email = '$email'");
+$stmt = $pdo->query("Select person_id,email,password,role,IsDeleted from person WHERE email = '$email'");
 $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
-if ($result) { // useri ekziston
+if ($result) {
+	 // useri ekziston
+	 if ($result[0]['IsDeleted'] == 1) {
+		header('Location: ../Authentification/login.php');	
+		exit;
+	 }
 	$_SESSION['role'] = $result[0]['role'];
 	$_SESSION['user_email'] = $email;
 	$_SESSION['user_id'] = $result[0]['person_id'];
-	header('Location: home.php');
+	if ($_SESSION["role"] == "admin" || $_SESSION["role"] == "worker" ) {
+		header('Location: ../Admin/home.php');
+		exit;	
+	}
+	else{
+
+		header('Location: ../User/home.php');
+		exit;
+	}
+
 } else {
 	$_SESSION['id'] = $userData['id'];
 	$_SESSION['user_email'] = $email;

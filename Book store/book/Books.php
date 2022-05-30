@@ -1,10 +1,10 @@
 <?php
 session_start();
 if (!isset($_SESSION['role'])) {
-    header('Location: ../Authentification/home.php');
+    header('Location: ../Authentification/login.php');
     exit();
 } else if ($_SESSION['role'] == 'user') {
-    header('Location: ../Authentification/home.php');
+    header('Location: ../User/home.php');
     exit();
 }
 include '../DBconnect.php';
@@ -34,6 +34,7 @@ include '../DBconnect.php';
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
     <script src="bookCrudScript.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4" crossorigin="anonymous"></script>
     <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css"> -->
     <style>
         table,
@@ -46,7 +47,7 @@ include '../DBconnect.php';
         table th,
         td,
         tr {
-            font-size: 13px;
+            font-size: 10px;
         }
 
         /* table tr ul.actions {margin: 0; white-space:nowrap;} */
@@ -58,7 +59,7 @@ include '../DBconnect.php';
     include "../Admin/header.php";
     ?>
 
-    <div class="container" id="data-div" style="width: 100%;">
+    <div class="container" id="data-div" style="margin-top: 70px;width: 100%;">
         <p id="success"></p>
         <div class="table-wrapper">
             <div class="table-title">

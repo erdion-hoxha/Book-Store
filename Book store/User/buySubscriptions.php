@@ -24,7 +24,7 @@ if (isset($_GET["id"]) && isset($_GET["price"]) && isset($_GET["type"]) && isset
                 case 'monthly':
                     $termination_date = date('Y-m-d', strtotime($current_time . ' + 1 months'));
                     break;
-                case 'quarter-annual':
+                case 'quarter_annual':
                     $termination_date = date('Y-m-d', strtotime($current_time . ' + 3 months'));
                     break;
                 case 'semi_annual':

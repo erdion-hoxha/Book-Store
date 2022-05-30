@@ -1,5 +1,15 @@
 <?php
 session_start();
+if (isset($_SESSION['permisson'])) {
+    unset($_SESSION['permisson']);
+}
+if (isset($_SESSION['access_token'])) {
+    unset($_SESSION['access_token']);
+}
+if (!isset($_SESSION['role'])) {
+    header('Location: login.php');
+    exit();
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -18,7 +28,7 @@ session_start();
     <?php
     include "../userHeader.php";
     ?>
-    <section class="bg-dark text-light p-5 p-lg-0 pt-lg-5 text-center text-sm-start">
+    <section class="bg-dark text-light p-5 p-lg-0 pt-lg-5 text-center text-sm-start" style="margin-top: 5%;">
         <div class="container">
             <div class="d-sm-flex align-items-center justify-content-between">
                 <div>
@@ -51,7 +61,7 @@ session_start();
                             <p class="card-text">
                                 You can keep up with your reading using our online platform.
                             </p>
-                            <a href="#" class="btn btn-primary">Read books</a>
+                            <a href="../User/books.php" class="btn btn-primary">Read books</a>
                         </div>
                     </div>
                 </div>
@@ -65,7 +75,7 @@ session_start();
                             <p class="card-text">
                                 Become a subscriber by buying our monthly deals to receive lower prices and the latest deals.
                             </p>
-                            <a href="#" class="btn btn-primary">Read More</a>
+                            <a href="../User/subscriptionIndex.php" class="btn btn-primary">Read More</a>
                         </div>
                     </div>
                 </div>
@@ -79,7 +89,7 @@ session_start();
                             <p class="card-text">
                                 You can come and read quietly in our physical bookstore reading section at Zogu I Boulevard, Tirana.
                             </p>
-                            <a href="#" class="btn btn-primary">Read More</a>
+                            <a href="../User/seatIndex.php" class="btn btn-primary">Read More</a>
                         </div>
                     </div>
                 </div>

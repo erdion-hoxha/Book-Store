@@ -29,7 +29,7 @@ if (count($data) == 0) {
         $stmt = $pdo->prepare("UPDATE `payment` SET Total = $total, Tax = $tax  WHERE payment_id = $payment_id");
         $stmt->execute();
         $pdo->commit();
-        echo json_encode(["Return" => true, "Message" => "U hoq me sukses nga shopping cart"]);
+        echo json_encode(["Return" => true, "Message" => "Blerja u krye me sukses"]);
     } catch (PDOException $e) {
         $pdo->rollBack();
         echo json_encode(["Return" => false, "Message" => $e->getMessage()]);

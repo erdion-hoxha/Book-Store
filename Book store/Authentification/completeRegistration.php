@@ -28,7 +28,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 		if ($result == null) {
 			// $stmt = $pdo->query("Select city_id from city WHERE name LIKE '$user_city'");
 			// $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
-			$stmt = $pdo->prepare("Select city_id from city WHERE name LIKE :city");
+			$stmt = $pdo->prepare("Select city_id from city_name WHERE name LIKE :city");
 			$stmt->bindParam(':city', $user_city);
 			$stmt->execute();
 			$result = $stmt->fetchAll(PDO::FETCH_ASSOC);

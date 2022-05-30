@@ -21,7 +21,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $person_name = $_POST["name_e"];
     $lastName = $_POST["surname_e"];
     $postal_code = $_POST["postalCode_e"];
-    $city_name = $_POST["city_e"];
+    $city_name = $_POST["city_e"]; 
     $street = $_POST["streetName_e"];
     $birthday = date('Y-m-d', strtotime($_POST["birthday_e"]));
 
